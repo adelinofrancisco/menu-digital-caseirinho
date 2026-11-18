@@ -1,0 +1,6 @@
+foto/
+prompt_para_implementa_o_do_menu_digital.md
+node_modules/
+dist/
+.env
+.env.local

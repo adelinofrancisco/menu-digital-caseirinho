@@ -1,0 +1,18 @@
+# Dependências e build
+node_modules/
+dist/
+.vite/
+.vercel/
+
+# Variáveis de ambiente locais (NUNCA subir para o GitHub)
+.env
+.env.local
+.env.*.local
+
+# Logs e sistema
+*.log
+.DS_Store
+
+# Materiais locais de referência (não necessários no deploy)
+foto/
+prompt_para_implementa_o_do_menu_digital.md
