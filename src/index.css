@@ -10,8 +10,8 @@
   html {
     font-family: var(--font-sans);
     scroll-behavior: smooth;
-    background-color: #120b08;
-    color: #f5ede4;
+    background-color: #170d08;
+    color: #f7eee4;
   }
 }
 
@@ -23,48 +23,48 @@
   font-family: var(--font-serif);
 }
 
-/* Fundo nobre de madeira escura envelhecida / nogueira (sem laranjas agressivos) */
+/* Fundo acolhedor de madeira rústica com calor gastronómico suave e equilibrado */
 .bg-rustic-wood {
-  background-color: #140d09;
+  background-color: #180e08;
   background-image:
     repeating-linear-gradient(
       180deg,
-      rgba(0, 0, 0, 0.45) 0px,
-      rgba(0, 0, 0, 0.08) 2px,
-      rgba(30, 18, 12, 0.25) 130px,
-      rgba(0, 0, 0, 0.5) 134px
+      rgba(0, 0, 0, 0.42) 0px,
+      rgba(0, 0, 0, 0.06) 2px,
+      rgba(45, 25, 15, 0.22) 130px,
+      rgba(0, 0, 0, 0.52) 134px
     ),
-    radial-gradient(ellipse at 50% 10%, rgba(120, 80, 50, 0.12), transparent 55%),
-    radial-gradient(ellipse at 50% 90%, rgba(0, 0, 0, 0.75), transparent 70%),
-    linear-gradient(90deg, #100805 0%, #1e120b 35%, #190f09 70%, #0d0603 100%);
+    radial-gradient(ellipse at 50% 12%, rgba(200, 120, 40, 0.14), transparent 55%),
+    radial-gradient(ellipse at 50% 88%, rgba(0, 0, 0, 0.7), transparent 70%),
+    linear-gradient(90deg, #120904 0%, #22130b 35%, #1d1009 70%, #0f0703 100%);
 }
 
-/* Prato de cerâmica/porcelana branca artesanal com sombra suave e realista */
+/* Prato de cerâmica/porcelana branca com aro realista */
 .ceramic-plate-rim {
-  background: radial-gradient(circle at 35% 30%, #ffffff 0%, #faf6f0 55%, #eae2d6 85%, #cfc5b6 100%);
+  background: radial-gradient(circle at 35% 30%, #ffffff 0%, #f7f2eb 55%, #eae1d3 85%, #cfc4b4 100%);
   box-shadow:
-    0 14px 28px -4px rgba(0, 0, 0, 0.7),
-    0 4px 10px -2px rgba(0, 0, 0, 0.4),
+    0 14px 30px -4px rgba(0, 0, 0, 0.72),
+    0 5px 12px -2px rgba(0, 0, 0, 0.45),
     inset 0 1px 3px rgba(255, 255, 255, 0.9),
-    inset 0 -2px 5px rgba(0, 0, 0, 0.2);
+    inset 0 -2px 5px rgba(0, 0, 0, 0.25);
 }
 
-/* Tampo da mesa em carvalho rústico e natural (tons de madeira autênticos) */
+/* Tampo de mesa de madeira rústica e quente no rodapé */
 .bg-wood-tabletop {
-  background-color: #6a4529;
+  background-color: #7b4f2c;
   background-image:
-    linear-gradient(180deg, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.1) 15%, rgba(255, 255, 255, 0.05) 50%, rgba(0, 0, 0, 0.5) 100%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.72) 0%, rgba(0, 0, 0, 0.12) 15%, rgba(255, 255, 255, 0.08) 50%, rgba(0, 0, 0, 0.45) 100%),
     repeating-linear-gradient(
       90deg,
-      rgba(35, 18, 10, 0.4) 0px,
-      rgba(140, 95, 60, 0.15) 2px,
-      rgba(100, 65, 40, 0.08) 95px,
-      rgba(25, 12, 6, 0.55) 100px
+      rgba(40, 20, 10, 0.38) 0px,
+      rgba(160, 105, 60, 0.18) 2px,
+      rgba(110, 70, 40, 0.1) 95px,
+      rgba(30, 14, 7, 0.55) 100px
     ),
-    linear-gradient(90deg, #462916 0%, #764c2d 30%, #8a5a35 50%, #6e4428 75%, #3d2211 100%);
+    linear-gradient(90deg, #4f2e18 0%, #835431 30%, #996339 50%, #7b4d2c 75%, #442412 100%);
   box-shadow:
     inset 0 12px 24px -6px rgba(0, 0, 0, 0.8),
-    0 -14px 32px rgba(0, 0, 0, 0.65);
+    0 -12px 30px rgba(0, 0, 0, 0.65);
 }
 
 /* Scrollbar limpa */

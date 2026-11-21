@@ -119,64 +119,64 @@ export default function PublicMenu() {
       <main className="relative mx-auto max-w-2xl px-4 pb-20 pt-5 sm:px-6 sm:pt-7">
         {/* Aviso de Modo Demonstração */}
         {!isSupabaseConfigured && (
-          <div className="mb-6 flex flex-wrap items-center justify-between gap-2 rounded-2xl border border-stone-700/60 bg-[#1c120c]/80 px-4 py-2.5 text-xs text-[#d8c0a8] backdrop-blur">
+          <div className="mb-6 flex flex-wrap items-center justify-between gap-2 rounded-2xl border border-amber-900/40 bg-[#21130a]/80 px-4 py-2.5 text-xs text-amber-200/90 backdrop-blur">
             <span>
               <strong>Modo Demonstração:</strong> a exibir o cardápio local.
             </span>
             <Link
               to="/admin"
-              className="font-bold text-white underline underline-offset-2 hover:text-[#f1e6da]"
+              className="font-bold text-amber-300 underline underline-offset-2 hover:text-amber-200"
             >
               Testar Painel Admin →
             </Link>
           </div>
         )}
 
-        {/* Título refinado estilo cartaz elegante (em tons creme e marfim, sem tons berrantes) */}
+        {/* Título com toque gastronómico caloroso e harmonioso */}
         <div className="mb-7 text-center">
-          <span className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#c5b19e]">
+          <span className="text-[11px] font-semibold uppercase tracking-[0.24em] text-amber-300/80">
             {RESTAURANT_INFO.socialHandle || '@RestauranteCaseirinho'}
           </span>
           <h2 className="mt-1 font-sans text-3xl font-black uppercase tracking-tight text-white drop-shadow-[0_4px_16px_rgba(0,0,0,0.85)] sm:text-5xl">
             Cardápio de
           </h2>
-          <p className="font-sans text-2xl font-black capitalize tracking-tight text-[#f3e7dc] drop-shadow-md sm:text-4xl">
+          <p className="font-sans text-2xl font-black capitalize tracking-tight text-amber-300/95 drop-shadow-md sm:text-4xl">
             {selectedCategory === 'Todos' ? diaDaSemanaAtual : selectedCategory}
           </p>
         </div>
 
-        {/* Prato do Dia (mantido no topo conforme pedido) */}
+        {/* Prato do Dia (mantido no topo) */}
         {!loading && !error && pratoDoDia && !searchTerm && (
           <div className="mb-9">
             <PratoDoDiaCard item={pratoDoDia} />
           </div>
         )}
 
-        {/* Barra de Pesquisa + Abas de Categorias */}
-        <section className="sticky top-0 z-30 -mx-4 mb-8 border-b border-stone-800/80 bg-[#140d09]/95 px-4 py-3 backdrop-blur-md sm:-mx-6 sm:px-6">
+        {/* Barra de Pesquisa + Abas de Categorias com botões em tom quente suave */}
+        <section className="sticky top-0 z-30 -mx-4 mb-8 border-b border-amber-900/40 bg-[#170e08]/95 px-4 py-3 backdrop-blur-md sm:-mx-6 sm:px-6">
           <div className="relative mx-auto max-w-xl">
-            <Search className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-[#a89584]" />
+            <Search className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-amber-300/50" />
             <input
               type="search"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               placeholder="Pesquisar prato, bebida ou café..."
               aria-label="Pesquisar no cardápio"
-              className="w-full rounded-2xl border border-stone-700/80 bg-[#1c120c]/90 py-2.5 pl-10 pr-10 text-sm text-[#fdfbf9] placeholder-[#8f7d6e] outline-none transition focus:border-[#d8c7b5] focus:ring-1 focus:ring-[#d8c7b5]/30"
+              className="w-full rounded-2xl border border-amber-900/40 bg-[#22130b]/90 py-2.5 pl-10 pr-10 text-sm text-stone-100 placeholder-stone-400 outline-none transition focus:border-amber-500/70 focus:ring-1 focus:ring-amber-500/20"
             />
             {searchTerm && (
               <button
                 type="button"
                 onClick={() => setSearchTerm('')}
                 aria-label="Limpar pesquisa"
-                className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full p-1 text-[#a89584] hover:text-white"
+                className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full p-1 text-stone-400 hover:text-white"
               >
                 <X className="h-4 w-4" />
               </button>
             )}
           </div>
 
-          {/* Abas com scroll horizontal sofisticadas */}
+          {/* Botões das Abas: tom caramelo/âmbar elegante e suave (sem laranjas néon agressivos) */}
           <div
             className="no-scrollbar mx-auto mt-2.5 flex max-w-xl items-center gap-1.5 overflow-x-auto pb-0.5"
             role="tablist"
@@ -193,8 +193,8 @@ export default function PublicMenu() {
                   onClick={() => setSelectedCategory(category)}
                   className={`shrink-0 rounded-full px-3.5 py-1.5 text-xs font-bold tracking-wide transition sm:text-sm ${
                     active
-                      ? 'border border-[#e0d3c3] bg-[#fbf7f2] text-[#22130a] shadow-sm'
-                      : 'border border-stone-800 bg-[#1c120c] text-[#c9b7a7] hover:border-stone-700 hover:text-white'
+                      ? 'border border-amber-500/50 bg-[#8c4b21] text-amber-50 shadow-sm ring-1 ring-amber-400/20'
+                      : 'border border-amber-900/35 bg-[#20120a] text-stone-300 hover:border-amber-700/50 hover:text-amber-200'
                   }`}
                 >
                   {category}
@@ -206,8 +206,8 @@ export default function PublicMenu() {
 
         {/* Estados de carregamento / erro / vazio */}
         {loading ? (
-          <div className="flex flex-col items-center justify-center gap-3 py-20 text-[#c7b29e]">
-            <Loader2 className="h-8 w-8 animate-spin text-[#d8c0a8]" />
+          <div className="flex flex-col items-center justify-center gap-3 py-20 text-amber-200/60">
+            <Loader2 className="h-8 w-8 animate-spin text-amber-400" />
             <p className="text-sm font-medium">A carregar o cardápio...</p>
           </div>
         ) : error ? (
@@ -219,8 +219,8 @@ export default function PublicMenu() {
             <p className="mt-1 text-sm text-red-200/80">{error}</p>
           </div>
         ) : groupedItems.length === 0 ? (
-          <div className="mx-auto max-w-md rounded-3xl border border-stone-800 bg-[#1c120c]/90 p-10 text-center">
-            <UtensilsCrossed className="mx-auto h-10 w-10 text-[#a89584]" />
+          <div className="mx-auto max-w-md rounded-3xl border border-amber-900/40 bg-[#22130b]/90 p-10 text-center">
+            <UtensilsCrossed className="mx-auto h-10 w-10 text-amber-400/60" />
             <h3 className="mt-4 text-lg font-bold text-white">
               Nenhum item encontrado
             </h3>
@@ -233,31 +233,31 @@ export default function PublicMenu() {
                 setSearchTerm('');
                 setSelectedCategory('Todos');
               }}
-              className="mt-5 rounded-xl border border-[#ded0c1] bg-[#fbf7f2] px-4 py-2 text-sm font-bold text-[#22130a] shadow hover:bg-white"
+              className="mt-5 rounded-xl border border-amber-600/40 bg-[#2a170d] px-4 py-2 text-sm font-bold text-amber-300 shadow hover:bg-[#341d10]"
             >
               Ver todo o cardápio
             </button>
           </div>
         ) : (
-          /* Listagem dos itens com espaçamento arejado e elegante no mobile */
+          /* Listagem dos itens com respiro equilibrado */
           <div className="space-y-12">
             {groupedItems.map(({ category, list }) => (
               <section key={category} aria-label={category} className="relative">
-                {/* Divisor de categoria discreto e clássico */}
-                <div className="mb-2 flex items-center justify-between border-b border-stone-800/80 pb-2.5">
+                {/* Divisor de categoria com detalhe dourado sutil */}
+                <div className="mb-2 flex items-center justify-between border-b border-amber-900/40 pb-2.5">
                   <div className="flex items-center gap-2">
-                    <span className="h-4 w-1 rounded-full bg-[#d8c0a8]" />
-                    <h3 className="font-sans text-lg font-black uppercase tracking-wider text-[#f5eee6] sm:text-xl">
+                    <span className="h-4 w-1 rounded-full bg-amber-400/80" />
+                    <h3 className="font-sans text-lg font-black uppercase tracking-wider text-amber-100 sm:text-xl">
                       {category}
                     </h3>
                   </div>
-                  <span className="text-[11px] font-semibold uppercase tracking-wider text-[#a89584]">
+                  <span className="text-[11px] font-semibold uppercase tracking-wider text-amber-200/70">
                     {list.length} {list.length === 1 ? 'item' : 'itens'}
                   </span>
                 </div>
 
-                {/* Lista com respiro vertical generoso entre cada prato */}
-                <div className="divide-y divide-stone-800/60">
+                {/* Lista em ziguezague alternado com respiro */}
+                <div className="divide-y divide-amber-950/35">
                   {list.map((item, index) => (
                     <MenuItemCard
                       key={item.id}
@@ -272,7 +272,7 @@ export default function PublicMenu() {
         )}
       </main>
 
-      {/* RODAPÉ: A MESA DE MADEIRA RÚSTICA E NATURAL */}
+      {/* RODAPÉ: A MESA DE MADEIRA RÚSTICA E ACOLHEDORA */}
       <footer className="relative mt-12">
         <div className="bg-wood-tabletop relative px-4 pb-12 pt-10 sm:px-6 sm:pb-14">
           <div className="pointer-events-none absolute left-6 top-3 hidden sm:block">
@@ -283,13 +283,13 @@ export default function PublicMenu() {
           </div>
 
           <div className="mx-auto max-w-xl">
-            {/* Placa marfim/creme elegante com as informações do restaurante */}
+            {/* Placa marfim com tipografia quente e nítida */}
             <div className="relative rounded-3xl border border-[#ded0c1] bg-[#fbf7f2] p-5 text-center text-[#22130a] shadow-2xl shadow-black/80 sm:p-6">
               <div className="absolute -right-2 -top-3">
                 <GreenLeaf className="h-7 w-7" rotate={20} />
               </div>
 
-              <span className="inline-block rounded-full bg-[#8c2d25] px-3 py-1 text-[10px] font-black uppercase tracking-[0.2em] text-white">
+              <span className="inline-block rounded-full bg-[#963821] px-3 py-1 text-[10px] font-black uppercase tracking-[0.2em] text-white">
                 Restaurante Caseirinho
               </span>
 
@@ -299,11 +299,11 @@ export default function PublicMenu() {
 
               <div className="mt-3 flex flex-col items-center justify-center gap-1.5 text-xs font-semibold text-[#543b2d] sm:text-sm">
                 <div className="flex items-center gap-1.5">
-                  <MapPin className="h-3.5 w-3.5 text-[#8c2d25]" />
+                  <MapPin className="h-3.5 w-3.5 text-[#963821]" />
                   <span>{RESTAURANT_INFO.location}</span>
                 </div>
                 <div className="flex items-center gap-1.5">
-                  <Clock className="h-3.5 w-3.5 text-[#73513b]" />
+                  <Clock className="h-3.5 w-3.5 text-[#7c4d29]" />
                   <span>{RESTAURANT_INFO.hours}</span>
                 </div>
                 <div className="mt-1 flex items-center gap-1.5 text-sm font-bold text-[#1a0f0a] sm:text-base">
@@ -323,7 +323,7 @@ export default function PublicMenu() {
                 to="/admin"
                 title="Área Administrativa"
                 aria-label="Aceder à área administrativa"
-                className="inline-flex items-center gap-1.5 rounded-full border border-stone-800 bg-[#160e09]/80 px-3 py-1 text-[11px] font-semibold text-[#baa99b] transition hover:border-[#ded0c1] hover:text-white"
+                className="inline-flex items-center gap-1.5 rounded-full border border-amber-900/50 bg-[#1c1109]/80 px-3 py-1 text-[11px] font-semibold text-amber-200/70 transition hover:border-amber-600/50 hover:text-white"
               >
                 <Lock className="h-3 w-3" />
                 <span>Gestão</span>

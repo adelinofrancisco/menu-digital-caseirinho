@@ -9,9 +9,9 @@ export default function PratoDoDiaCard({ item }) {
   return (
     <section
       aria-label="Prato do Dia"
-      className="relative mx-auto max-w-2xl overflow-hidden rounded-3xl border border-[#3d2719]/70 bg-gradient-to-br from-[#24150e] via-[#1a0f0a] to-[#140a06] p-1 shadow-2xl shadow-black/80"
+      className="relative mx-auto max-w-2xl overflow-hidden rounded-3xl border border-amber-800/40 bg-gradient-to-br from-[#29170e] via-[#1d1009] to-[#160b06] p-1 shadow-2xl shadow-black/80"
     >
-      <div className="relative overflow-hidden rounded-[22px] bg-[#1a0f0a]/95 p-5 sm:p-7">
+      <div className="relative overflow-hidden rounded-[22px] bg-[#1c0f08]/95 p-5 sm:p-7">
         <div className="relative flex flex-col items-center gap-5 sm:flex-row sm:items-center sm:gap-7">
           {/* Prato de cerâmica branca com aro refinado */}
           <div className="relative shrink-0">
@@ -24,7 +24,7 @@ export default function PratoDoDiaCard({ item }) {
                     className="h-full w-full object-cover"
                   />
                 ) : (
-                  <div className="flex h-full w-full flex-col items-center justify-center bg-stone-900 text-[#d8c0a8]">
+                  <div className="flex h-full w-full flex-col items-center justify-center bg-stone-900 text-amber-300/70">
                     <Utensils className="h-8 w-8" />
                     <span className="mt-1 text-[9px] font-bold uppercase tracking-widest">
                       Caseirinho
@@ -34,8 +34,8 @@ export default function PratoDoDiaCard({ item }) {
               </div>
             </div>
 
-            {/* Selo Prato do Dia em vermelho nobre */}
-            <div className="absolute -left-1 top-1 inline-flex items-center gap-1 rounded-full bg-[#b82e24] px-3 py-1 text-[10px] font-extrabold uppercase tracking-wider text-white shadow-md ring-2 ring-[#1a0f0a]">
+            {/* Selo Prato do Dia em tom quente suave e elegante */}
+            <div className="absolute -left-1 top-1 inline-flex items-center gap-1 rounded-full bg-[#bf3626] px-3 py-1 text-[10px] font-extrabold uppercase tracking-wider text-white shadow-md ring-2 ring-[#1c0f08]">
               <Flame className="h-3 w-3 fill-amber-200 text-amber-200" />
               <span>PRATO DO DIA</span>
             </div>
@@ -48,8 +48,8 @@ export default function PratoDoDiaCard({ item }) {
 
           {/* Informações do Prato do Dia */}
           <div className="flex flex-1 flex-col text-center sm:text-left">
-            <div className="inline-flex items-center justify-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.2em] text-[#cfb79f] sm:justify-start">
-              <Sparkles className="h-3 w-3 text-[#d8c0a8]" />
+            <div className="inline-flex items-center justify-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.2em] text-amber-300/90 sm:justify-start">
+              <Sparkles className="h-3 w-3 text-amber-400" />
               <span>Sugestão Especial • {item.categoria}</span>
             </div>
 
@@ -58,18 +58,18 @@ export default function PratoDoDiaCard({ item }) {
             </h2>
 
             {item.descricao && (
-              <p className="mt-1.5 text-xs leading-relaxed text-[#d4c3b2] sm:text-sm">
+              <p className="mt-1.5 text-xs leading-relaxed text-[#d9c8b8] sm:text-sm">
                 {item.descricao}
               </p>
             )}
 
-            {/* Preço em badge marfim elegante */}
+            {/* Preço em badge acolhedor com tom âmbar suave */}
             <div className="mt-3.5 flex items-center justify-center sm:justify-start">
-              <div className="inline-flex items-baseline gap-2 rounded-xl border border-[#d8c7b5]/60 bg-[#faf6f0] px-3.5 py-1.5 shadow-md">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-[#73513b]">
+              <div className="inline-flex items-baseline gap-2 rounded-xl border border-amber-600/35 bg-[#2a170d]/90 px-3.5 py-1.5 shadow-md">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-amber-200/75">
                   Preço
                 </span>
-                <span className="font-sans text-xl font-black tracking-tight text-[#22130b] sm:text-2xl">
+                <span className="font-sans text-xl font-black tracking-tight text-amber-300 sm:text-2xl">
                   {formatKwanza(item.preco)}
                 </span>
               </div>
