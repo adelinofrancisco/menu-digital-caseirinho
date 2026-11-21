@@ -10,8 +10,8 @@
   html {
     font-family: var(--font-sans);
     scroll-behavior: smooth;
-    background-color: #1a0f0a;
-    color: #f7ede2;
+    background-color: #120b08;
+    color: #f5ede4;
   }
 }
 
@@ -23,51 +23,51 @@
   font-family: var(--font-serif);
 }
 
-/* Fundo elegante de madeira rústica escura (inspirado no layout de referência) */
+/* Fundo nobre de madeira escura envelhecida / nogueira (sem laranjas agressivos) */
 .bg-rustic-wood {
-  background-color: #1d1009;
+  background-color: #140d09;
   background-image:
     repeating-linear-gradient(
       180deg,
-      rgba(0, 0, 0, 0.42) 0px,
-      rgba(0, 0, 0, 0.05) 3px,
-      rgba(40, 22, 14, 0.3) 120px,
-      rgba(0, 0, 0, 0.55) 124px
+      rgba(0, 0, 0, 0.45) 0px,
+      rgba(0, 0, 0, 0.08) 2px,
+      rgba(30, 18, 12, 0.25) 130px,
+      rgba(0, 0, 0, 0.5) 134px
     ),
-    radial-gradient(ellipse at 50% 15%, rgba(184, 115, 51, 0.22), transparent 60%),
-    radial-gradient(ellipse at 50% 85%, rgba(0, 0, 0, 0.8), transparent 70%),
-    linear-gradient(90deg, #180b06 0%, #29150c 35%, #24130b 70%, #150904 100%);
+    radial-gradient(ellipse at 50% 10%, rgba(120, 80, 50, 0.12), transparent 55%),
+    radial-gradient(ellipse at 50% 90%, rgba(0, 0, 0, 0.75), transparent 70%),
+    linear-gradient(90deg, #100805 0%, #1e120b 35%, #190f09 70%, #0d0603 100%);
 }
 
-/* Prato de cerâmica branca com profundidade e sombra realista */
+/* Prato de cerâmica/porcelana branca artesanal com sombra suave e realista */
 .ceramic-plate-rim {
-  background: radial-gradient(circle at 35% 30%, #ffffff 0%, #f1ebe3 50%, #d8cec3 85%, #b6a798 100%);
+  background: radial-gradient(circle at 35% 30%, #ffffff 0%, #faf6f0 55%, #eae2d6 85%, #cfc5b6 100%);
   box-shadow:
-    0 16px 36px -6px rgba(0, 0, 0, 0.75),
-    0 6px 14px -2px rgba(0, 0, 0, 0.5),
-    inset 0 2px 4px rgba(255, 255, 255, 0.8),
-    inset 0 -3px 6px rgba(0, 0, 0, 0.35);
+    0 14px 28px -4px rgba(0, 0, 0, 0.7),
+    0 4px 10px -2px rgba(0, 0, 0, 0.4),
+    inset 0 1px 3px rgba(255, 255, 255, 0.9),
+    inset 0 -2px 5px rgba(0, 0, 0, 0.2);
 }
 
-/* Tampo de mesa de madeira rústica iluminada (para o rodapé "a mesa") */
+/* Tampo da mesa em carvalho rústico e natural (tons de madeira autênticos) */
 .bg-wood-tabletop {
-  background-color: #8c5b32;
+  background-color: #6a4529;
   background-image:
-    linear-gradient(180deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.15) 18%, rgba(255, 255, 255, 0.1) 45%, rgba(0, 0, 0, 0.4) 100%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.1) 15%, rgba(255, 255, 255, 0.05) 50%, rgba(0, 0, 0, 0.5) 100%),
     repeating-linear-gradient(
       90deg,
-      rgba(50, 25, 10, 0.45) 0px,
-      rgba(180, 125, 75, 0.2) 2px,
-      rgba(140, 90, 50, 0.1) 90px,
-      rgba(40, 20, 8, 0.6) 94px
+      rgba(35, 18, 10, 0.4) 0px,
+      rgba(140, 95, 60, 0.15) 2px,
+      rgba(100, 65, 40, 0.08) 95px,
+      rgba(25, 12, 6, 0.55) 100px
     ),
-    linear-gradient(90deg, #5c3519 0%, #9e693b 30%, #b87c48 50%, #915d33 75%, #4f2c13 100%);
+    linear-gradient(90deg, #462916 0%, #764c2d 30%, #8a5a35 50%, #6e4428 75%, #3d2211 100%);
   box-shadow:
-    inset 0 10px 24px -6px rgba(0, 0, 0, 0.7),
-    0 -12px 30px rgba(0, 0, 0, 0.6);
+    inset 0 12px 24px -6px rgba(0, 0, 0, 0.8),
+    0 -14px 32px rgba(0, 0, 0, 0.65);
 }
 
-/* Barra de rolagem discreta */
+/* Scrollbar limpa */
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
