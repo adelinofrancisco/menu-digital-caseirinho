@@ -2,8 +2,10 @@ import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   AlertCircle,
+  Clock,
   Loader2,
   Lock,
+  MapPin,
   Phone,
   Search,
   UtensilsCrossed,
@@ -12,8 +14,20 @@ import {
 import Navbar from '../components/Navbar';
 import PratoDoDiaCard from '../components/PratoDoDiaCard';
 import MenuItemCard from '../components/MenuItemCard';
+import GreenLeaf from '../components/GreenLeaf';
 import { isSupabaseConfigured, menuService } from '../lib/supabaseClient';
-import { MENU_CATEGORIES, RESTAURANT_INFO, getWhatsAppUrl } from '../lib/formatters';
+import { MENU_CATEGORIES, RESTAURANT_INFO } from '../lib/formatters';
+
+// Dias da semana em Português para o cabeçalho dinâmico idêntico à imagem de referência
+const DIAS_DA_SEMANA = [
+  'domingo',
+  'segunda-feira',
+  'terça-feira',
+  'quarta-feira',
+  'quinta-feira',
+  'sexta-feira',
+  'sábado',
+];
 
 export default function PublicMenu() {
   const [items, setItems] = useState([]);
@@ -21,6 +35,11 @@ export default function PublicMenu() {
   const [error, setError] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('Todos');
   const [searchTerm, setSearchTerm] = useState('');
+
+  const diaDaSemanaAtual = useMemo(() => {
+    const hoje = new Date().getDay();
+    return DIAS_DA_SEMANA[hoje] || 'hoje';
+  }, []);
 
   useEffect(() => {
     let active = true;
@@ -54,7 +73,7 @@ export default function PublicMenu() {
     [items]
   );
 
-  // Categorias dinâmicas ordenadas segundo a ordem lógica do cardápio físico
+  // Categorias dinâmicas ordenadas segundo a ordem do cardápio físico
   const categories = useMemo(() => {
     const present = new Set(items.map((item) => item.categoria).filter(Boolean));
     const ordered = MENU_CATEGORIES.filter((cat) => present.has(cat));
@@ -99,60 +118,72 @@ export default function PublicMenu() {
   }, [filteredItems, selectedCategory, categories]);
 
   return (
-    <div className="min-h-screen bg-chalkboard text-stone-100">
+    <div className="min-h-screen bg-rustic-wood text-[#f7ede2]">
       <Navbar />
 
-      <main className="mx-auto max-w-5xl px-4 pb-16 pt-6 sm:px-6 sm:pt-8">
+      <main className="relative mx-auto max-w-3xl px-4 pb-20 pt-5 sm:px-6 sm:pt-7">
         {/* Aviso discreto apenas em Modo Demonstração */}
         {!isSupabaseConfigured && (
-          <div className="mb-6 flex flex-wrap items-center justify-between gap-2 rounded-2xl border border-amber-500/30 bg-amber-500/10 px-4 py-2.5 text-xs text-amber-200">
+          <div className="mb-6 flex flex-wrap items-center justify-between gap-2 rounded-2xl border border-amber-600/40 bg-amber-950/60 px-4 py-2.5 text-xs text-amber-200 backdrop-blur">
             <span>
-              <strong>Modo Demonstração:</strong> a exibir o cardápio local do Restaurante Caseirinho. Configure o <code className="rounded bg-black/30 px-1 py-0.5">.env</code> para ligar ao Supabase.
+              <strong>Modo Demonstração:</strong> a exibir o cardápio local.
             </span>
             <Link
               to="/admin"
-              className="font-bold text-amber-300 underline decoration-amber-400/60 underline-offset-2 hover:text-amber-200"
+              className="font-bold text-amber-300 underline underline-offset-2 hover:text-amber-200"
             >
               Testar Painel Admin →
             </Link>
           </div>
         )}
 
-        {/* Secção Destaque: Prato do Dia */}
+        {/* Título de Destaque no estilo da imagem de referência */}
+        <div className="mb-8 text-center">
+          <span className="text-xs font-semibold uppercase tracking-[0.24em] text-amber-300/80">
+            {RESTAURANT_INFO.socialHandle || '@RestauranteCaseirinho'}
+          </span>
+          <h2 className="mt-1 font-sans text-3xl font-black uppercase tracking-tight text-white drop-shadow-[0_4px_16px_rgba(0,0,0,0.8)] sm:text-5xl">
+            Cardápio de
+          </h2>
+          <p className="font-sans text-2xl font-black capitalize tracking-tight text-amber-400 drop-shadow-md sm:text-4xl">
+            {selectedCategory === 'Todos' ? diaDaSemanaAtual : selectedCategory}
+          </p>
+        </div>
+
+        {/* Secção Destaque: Prato do Dia (mantido no topo conforme solicitado) */}
         {!loading && !error && pratoDoDia && !searchTerm && (
-          <div className="mb-8">
+          <div className="mb-9">
             <PratoDoDiaCard item={pratoDoDia} />
           </div>
         )}
 
-        {/* Barra sticky de Pesquisa + Abas de Categorias */}
-        <section className="sticky top-0 z-30 -mx-4 mb-7 border-b border-stone-800/80 bg-[#141816]/92 px-4 py-3.5 backdrop-blur-md sm:-mx-6 sm:px-6">
-          {/* Pesquisa rápida */}
-          <div className="relative">
-            <Search className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-stone-400" />
+        {/* Barra de Pesquisa + Abas de Categorias */}
+        <section className="sticky top-0 z-30 -mx-4 mb-8 border-b border-amber-900/50 bg-[#190c06]/92 px-4 py-3 backdrop-blur-md sm:-mx-6 sm:px-6">
+          <div className="relative mx-auto max-w-2xl">
+            <Search className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-amber-300/60" />
             <input
               type="search"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              placeholder="Pesquisar prato, sumo, café ou aperitivo..."
+              placeholder="Pesquisar prato, sumo, café..."
               aria-label="Pesquisar no cardápio"
-              className="w-full rounded-2xl border border-stone-800 bg-[#1c221e] py-3 pl-10 pr-10 text-sm text-stone-100 placeholder-stone-400 outline-none transition focus:border-amber-500/70 focus:ring-2 focus:ring-amber-500/20"
+              className="w-full rounded-2xl border border-amber-900/60 bg-[#251208]/90 py-2.5 pl-10 pr-10 text-sm text-stone-100 placeholder-stone-400 outline-none transition focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20"
             />
             {searchTerm && (
               <button
                 type="button"
                 onClick={() => setSearchTerm('')}
                 aria-label="Limpar pesquisa"
-                className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full p-1 text-stone-400 hover:bg-stone-800 hover:text-stone-100"
+                className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full p-1 text-stone-400 hover:text-stone-100"
               >
                 <X className="h-4 w-4" />
               </button>
             )}
           </div>
 
-          {/* Filtros rápidos em Abas (Tabs) */}
+          {/* Abas com scroll horizontal */}
           <div
-            className="no-scrollbar mt-3 flex items-center gap-2 overflow-x-auto pb-0.5"
+            className="no-scrollbar mx-auto mt-2.5 flex max-w-2xl items-center gap-2 overflow-x-auto pb-0.5"
             role="tablist"
             aria-label="Categorias do menu"
           >
@@ -165,10 +196,10 @@ export default function PublicMenu() {
                   role="tab"
                   aria-selected={active}
                   onClick={() => setSelectedCategory(category)}
-                  className={`shrink-0 rounded-full px-4 py-2 text-xs font-bold tracking-wide transition sm:text-sm ${
+                  className={`shrink-0 rounded-full px-4 py-1.5 text-xs font-bold tracking-wide transition sm:text-sm ${
                     active
-                      ? 'bg-red-600 text-white shadow-md shadow-red-950/50 ring-1 ring-red-400/40'
-                      : 'border border-stone-800 bg-[#1b201d] text-stone-300 hover:border-amber-500/40 hover:text-amber-300'
+                      ? 'bg-gradient-to-r from-red-600 to-amber-600 text-white shadow-md shadow-red-950/60 ring-1 ring-amber-300/40'
+                      : 'border border-amber-900/50 bg-[#231107] text-[#e6d5c5] hover:border-amber-600/50 hover:text-amber-300'
                   }`}
                 >
                   {category}
@@ -178,28 +209,28 @@ export default function PublicMenu() {
           </div>
         </section>
 
-        {/* Estados de carregamento / erro / vazio */}
+        {/* Estados: Carregamento / Erro / Vazio */}
         {loading ? (
-          <div className="flex flex-col items-center justify-center gap-3 py-20 text-stone-400">
+          <div className="flex flex-col items-center justify-center gap-3 py-20 text-amber-200/60">
             <Loader2 className="h-8 w-8 animate-spin text-amber-500" />
-            <p className="text-sm font-medium">A carregar o cardápio do dia...</p>
+            <p className="text-sm font-medium">A carregar o cardápio...</p>
           </div>
         ) : error ? (
-          <div className="mx-auto max-w-md rounded-2xl border border-red-500/40 bg-red-950/30 p-6 text-center">
+          <div className="mx-auto max-w-md rounded-2xl border border-red-500/40 bg-red-950/40 p-6 text-center">
             <AlertCircle className="mx-auto h-8 w-8 text-red-400" />
-            <h2 className="mt-3 text-base font-bold text-red-100">
+            <h3 className="mt-3 text-base font-bold text-red-100">
               Erro ao carregar o menu
-            </h2>
+            </h3>
             <p className="mt-1 text-sm text-red-200/80">{error}</p>
           </div>
         ) : groupedItems.length === 0 ? (
-          <div className="mx-auto max-w-md rounded-3xl border border-stone-800 bg-[#1a1f1c] p-10 text-center">
+          <div className="mx-auto max-w-md rounded-3xl border border-amber-900/40 bg-[#221108]/90 p-10 text-center">
             <UtensilsCrossed className="mx-auto h-10 w-10 text-amber-500/60" />
-            <h2 className="mt-4 text-lg font-bold text-stone-100">
+            <h3 className="mt-4 text-lg font-bold text-stone-100">
               Nenhum item encontrado
-            </h2>
+            </h3>
             <p className="mt-1 text-sm text-stone-400">
-              Não encontrámos pratos correspondentes à sua pesquisa.
+              Tente outra pesquisa ou explore as categorias.
             </p>
             <button
               type="button"
@@ -213,24 +244,31 @@ export default function PublicMenu() {
             </button>
           </div>
         ) : (
+          /* Listagem dos itens com layout alternado (esquerda/direita) como no cartaz */
           <div className="space-y-10">
             {groupedItems.map(({ category, list }) => (
-              <section key={category} aria-label={category}>
-                <div className="mb-4 flex items-center justify-between gap-3">
-                  <div className="flex items-center gap-3">
-                    <span className="h-6 w-1.5 rounded-full bg-gradient-to-b from-red-500 to-amber-500" />
-                    <h2 className="font-serif-display text-2xl font-bold tracking-wide text-stone-50 sm:text-3xl">
+              <section key={category} aria-label={category} className="relative">
+                {/* Divisor de categoria elegante */}
+                <div className="mb-4 flex items-center justify-between border-b border-amber-900/40 pb-2">
+                  <div className="flex items-center gap-2.5">
+                    <span className="h-5 w-1.5 rounded-full bg-gradient-to-b from-red-500 to-amber-500" />
+                    <h3 className="font-sans text-xl font-black uppercase tracking-wider text-amber-200 sm:text-2xl">
                       {category}
-                    </h2>
+                    </h3>
                   </div>
-                  <span className="rounded-full border border-stone-800 bg-stone-900/70 px-2.5 py-0.5 text-xs font-semibold text-stone-400">
+                  <span className="text-xs font-semibold uppercase tracking-wider text-amber-300/70">
                     {list.length} {list.length === 1 ? 'item' : 'itens'}
                   </span>
                 </div>
 
-                <div className="grid gap-3.5 sm:grid-cols-2 sm:gap-4">
-                  {list.map((item) => (
-                    <MenuItemCard key={item.id} item={item} />
+                {/* Lista em ziguezague alternado */}
+                <div className="divide-y divide-amber-950/40">
+                  {list.map((item, index) => (
+                    <MenuItemCard
+                      key={item.id}
+                      item={item}
+                      align={index % 2 === 0 ? 'left' : 'right'}
+                    />
                   ))}
                 </div>
               </section>
@@ -239,37 +277,66 @@ export default function PublicMenu() {
         )}
       </main>
 
-      {/* Rodapé com contacto e link discreto para a área administrativa */}
-      <footer className="border-t border-stone-800/80 bg-[#111513]">
-        <div className="mx-auto flex max-w-5xl flex-col items-center justify-between gap-4 px-4 py-8 text-center sm:flex-row sm:px-6 sm:text-left">
-          <div>
-            <p className="font-script text-3xl font-bold text-stone-100">
-              {RESTAURANT_INFO.shortName}
-            </p>
-            <p className="mt-1 text-xs text-stone-400">
-              {RESTAURANT_INFO.location} • {RESTAURANT_INFO.hours}
-            </p>
+      {/* RODAPÉ: A MESA DE MADEIRA RÚSTICA ("coloque mesmo a mesa tambem") */}
+      <footer className="relative mt-8">
+        {/* Tampo da mesa com tábuas e iluminação de madeira rústica */}
+        <div className="bg-wood-tabletop relative px-4 pb-12 pt-10 sm:px-6 sm:pb-14">
+          {/* Folhas decorativas espalhadas sobre a mesa de madeira */}
+          <div className="pointer-events-none absolute left-6 top-3 hidden sm:block">
+            <GreenLeaf className="h-10 w-10" rotate={-45} />
+          </div>
+          <div className="pointer-events-none absolute right-8 top-4">
+            <GreenLeaf className="h-12 w-12" rotate={35} />
           </div>
 
-          <div className="flex items-center gap-4">
-            <a
-              href={getWhatsAppUrl()}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 rounded-full border border-stone-800 bg-stone-900 px-3.5 py-2 text-xs font-semibold text-amber-300 transition hover:border-amber-500/50"
-            >
-              <Phone className="h-3.5 w-3.5" />
-              <span>{RESTAURANT_INFO.phoneDisplay}</span>
-            </a>
+          <div className="mx-auto max-w-xl">
+            {/* Cartão pill em tom creme/marfim idêntico ao "Faça seu pedido" da imagem de referência */}
+            <div className="relative rounded-3xl border border-stone-200/90 bg-[#fbf5ee] p-5 text-center text-[#2a160d] shadow-2xl shadow-black/80 sm:p-6">
+              {/* Folha decorativa no canto da placa */}
+              <div className="absolute -right-2 -top-3">
+                <GreenLeaf className="h-7 w-7" rotate={20} />
+              </div>
 
-            <Link
-              to="/admin"
-              title="Área Administrativa"
-              aria-label="Aceder à área administrativa"
-              className="inline-flex items-center gap-1.5 rounded-full border border-stone-800/80 p-2 text-stone-500 transition hover:border-amber-500/40 hover:text-amber-400"
-            >
-              <Lock className="h-4 w-4" />
-            </Link>
+              <span className="inline-block rounded-full bg-red-600 px-3 py-1 text-[10px] font-black uppercase tracking-[0.2em] text-white">
+                Restaurante Caseirinho
+              </span>
+
+              <h4 className="mt-2 font-script text-3xl font-bold text-[#1f0f08] sm:text-4xl">
+                {RESTAURANT_INFO.shortName}
+              </h4>
+
+              <div className="mt-3 flex flex-col items-center justify-center gap-1.5 text-xs font-semibold text-[#543422] sm:text-sm">
+                <div className="flex items-center gap-1.5">
+                  <MapPin className="h-3.5 w-3.5 text-red-600" />
+                  <span>{RESTAURANT_INFO.location}</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <Clock className="h-3.5 w-3.5 text-amber-700" />
+                  <span>{RESTAURANT_INFO.hours}</span>
+                </div>
+                <div className="mt-1 flex items-center gap-1.5 text-sm font-bold text-[#1f0f08] sm:text-base">
+                  <Phone className="h-4 w-4 text-emerald-700" />
+                  <span>{RESTAURANT_INFO.phoneDisplay}</span>
+                </div>
+              </div>
+
+              <div className="mt-4 border-t border-[#dfcfbd] pt-3 text-[11px] text-[#7d563e]">
+                Preços e pratos sujeitos a confirmação no atendimento presencial
+              </div>
+            </div>
+
+            {/* Acesso discreto ao painel administrativo */}
+            <div className="mt-5 flex items-center justify-center gap-2">
+              <Link
+                to="/admin"
+                title="Área Administrativa"
+                aria-label="Aceder à área administrativa"
+                className="inline-flex items-center gap-1.5 rounded-full border border-amber-900/60 bg-[#25130a]/80 px-3 py-1 text-[11px] font-semibold text-amber-200/70 transition hover:border-amber-500 hover:text-amber-100"
+              >
+                <Lock className="h-3 w-3" />
+                <span>Gestão</span>
+              </Link>
+            </div>
           </div>
         </div>
       </footer>
